@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 from getpass import getpass
+import dj_database_url 
+import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,13 +25,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d_=5s(h(+q7%4$pkd0&(pr*w9=ml702ff2phs+5sf214w1jav_'
-
+SECRET_KEY = os.environ.get('SECRET_KEY')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD') 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'kidneyfoundation.herokuapp.com']  
+
 
 
 # Application definition
@@ -44,6 +48,7 @@ INSTALLED_APPS = [
     'kidneyfoundation.apps.KidneyfoundationConfig',
     'crispy_forms',
     'mathfilters',
+    'whitenoise.runserver_nostatic',
 
 ]
 
@@ -88,15 +93,12 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbjp6p2jjtpf5e',
-        'USER': 'ocjbfnqcqywibm',
-        'PASSWORD': '60e4999a1de18d967ae1b4993b9a2a2e6892d8a4904a147c6d5079e7c7d50f48',
-        'HOST': 'ec2-54-157-16-196.compute-1.amazonaws.com',
-        'PORT': 5432
+        'NAME': 'kidneyfoundation',
+        'USER': 'postgres',
+        'PASSWORD': 'bambooand',
+        'HOST': 'localhost',
     }
 }
-
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
@@ -139,6 +141,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
    os.path.join(BASE_DIR, 'intex/static')
 ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
