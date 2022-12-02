@@ -88,10 +88,11 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'kidneyfoundation',
-        'USER': 'postgres',
-        'PASSWORD': 'bambooand',
-        'HOST': 'localhost',
+        'NAME': 'dbjp6p2jjtpf5e',
+        'USER': 'ocjbfnqcqywibm',
+        'PASSWORD': '60e4999a1de18d967ae1b4993b9a2a2e6892d8a4904a147c6d5079e7c7d50f48',
+        'HOST': 'ec2-54-157-16-196.compute-1.amazonaws.com',
+        'PORT': 5432
     }
 }
 
