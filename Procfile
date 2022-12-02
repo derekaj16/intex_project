@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn kidneyfoundation.wsgi
+web: gunicorn intex.wsgi
